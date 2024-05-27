@@ -1,3 +1,3 @@
-# zarity_health_assignment
+# Zarity Health Flutter Dev Assignment
 
-A new Flutter project.
+#### Screen recording and apk is added into the `demo` folder.
