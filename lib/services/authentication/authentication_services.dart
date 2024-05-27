@@ -57,7 +57,7 @@ class AuthenticationServices {
     }
   }
 
-  void storeUserData(String userId, String email, String name) async {
+  Future<void> storeUserData(String userId, String email, String name) async {
     // Fetch tasks and add it to the current user instance
     List<dynamic> tasks = await TasksServices().fetchTasks();
     _firestore

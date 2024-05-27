@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:zarity_health_assignment/routes/route_constants.dart';
 import 'package:zarity_health_assignment/screens/authentication_screen.dart';
 import 'package:zarity_health_assignment/screens/home_screen.dart';
+import 'package:zarity_health_assignment/screens/settings_screen.dart';
 import 'package:zarity_health_assignment/screens/splash_screen.dart';
 import 'package:zarity_health_assignment/utils/navigation_key.dart';
 
@@ -24,6 +25,11 @@ class RouteConfig {
         name: RouteConstants.homeScreen,
         path: '/',
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        name: RouteConstants.settingsScreen,
+        path: '/settings-screen',
+        builder: (context, state) => const SettingScreen(),
       ),
     ],
   );

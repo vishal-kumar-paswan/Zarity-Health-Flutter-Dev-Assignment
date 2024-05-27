@@ -49,7 +49,7 @@ class TasksServices {
         .update({'tasks': tasksJson}).then(
       (_) {
         LogMessage('Task updated');
-        DisplayMessage.showToast("Task updated!", 3);
+        DisplayMessage.showToast("Task Updated!", 3);
       },
     ).catchError(
       (error) {

@@ -71,29 +71,33 @@ class AuthenticationScreen extends StatelessWidget {
                       user.displayName!.indexOf(' '),
                     );
 
-                    if (context.mounted) {
-                      context.goNamed(RouteConstants.homeScreen);
-                    }
-                    LogMessage(user.email!);
-
                     bool userExists =
                         await authenticationServices.checkUserExists(user.uid);
 
                     if (userExists) {
+                      if (context.mounted) {
+                        context.goNamed(RouteConstants.homeScreen);
+                      }
                       DisplayMessage.showToast(
                         "Welcome back, $firstName",
                         3,
                       );
                     } else {
-                      authenticationServices.storeUserData(
+                      authenticationServices
+                          .storeUserData(
                         user.uid,
                         user.email!,
                         user.displayName!,
-                      );
-                      DisplayMessage.showToast(
-                        "Welcome onboard, $firstName",
-                        3,
-                      );
+                      )
+                          .then((_) {
+                        if (context.mounted) {
+                          context.goNamed(RouteConstants.homeScreen);
+                          DisplayMessage.showToast(
+                            "Welcome onboard, $firstName",
+                            3,
+                          );
+                        }
+                      });
                     }
                   } else {
                     DisplayMessage.showToast(
@@ -120,45 +124,50 @@ class AuthenticationScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // TODO: Add Facebook login
-              // Gap(16.h),
-              // ElevatedButton(
-              //   style: ElevatedButton.styleFrom(
-              //     fixedSize: Size(
-              //       double.infinity,
-              //       52.h,
-              //     ),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(8.0),
-              //       side: const BorderSide(
-              //         width: 0.1,
-              //         color: Colors.black87,
-              //       ),
-              //     ),
-              //     backgroundColor: Colors.blue.shade500,
-              //     elevation: 0.5,
-              //     shadowColor: Colors.black,
-              //   ),
-              //   onPressed: () {},
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       Image.asset(
-              //         "assets/icons/facebook.png",
-              //         height: 32,
-              //         width: 32,
-              //       ),
-              //       Gap(15.w),
-              //       Text(
-              //         'Continue with Facebook',
-              //         style: Theme.of(context)
-              //             .textTheme
-              //             .bodyLarge!
-              //             .copyWith(fontSize: 16.sp, color: Colors.white),
-              //       ),
-              //     ],
-              //   ),
-              // )
+              Gap(16.h),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(
+                    double.infinity,
+                    52.h,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    side: const BorderSide(
+                      width: 0.1,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  backgroundColor: Colors.blue.shade500,
+                  elevation: 0.5,
+                  shadowColor: Colors.black,
+                ),
+                onPressed: () {
+                  // TODO: Implement facebook login
+                  DisplayMessage.showToast(
+                    "This feature will be implemented soon!",
+                    3,
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/icons/facebook.png",
+                      height: 32,
+                      width: 32,
+                    ),
+                    Gap(15.w),
+                    Text(
+                      'Continue with Facebook',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontSize: 16.sp, color: Colors.white),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

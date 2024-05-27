@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zarity_health_assignment/blocs/task_bloc/task_bloc.dart';
+import 'package:zarity_health_assignment/cubits/blogs_cubit/blogs_cubit.dart';
 import 'package:zarity_health_assignment/cubits/user_cubit/user_cubit.dart';
+import 'package:zarity_health_assignment/cubits/workout_cubit/workout_cubit.dart';
 import 'package:zarity_health_assignment/routes/route_config.dart';
 import 'firebase_options.dart';
 
@@ -30,8 +32,17 @@ class MainApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider<UserCubit>(
-                create: (BuildContext context) => UserCubit()),
-            BlocProvider<TaskBloc>(create: (BuildContext context) => TaskBloc())
+              create: (BuildContext context) => UserCubit(),
+            ),
+            BlocProvider<TaskBloc>(
+              create: (BuildContext context) => TaskBloc(),
+            ),
+            BlocProvider<WorkoutCubit>(
+              create: (BuildContext context) => WorkoutCubit(),
+            ),
+            BlocProvider<BlogsCubit>(
+              create: (BuildContext context) => BlogsCubit(),
+            ),
           ],
           child: MaterialApp.router(
             builder: FToastBuilder(),
@@ -44,7 +55,6 @@ class MainApp extends StatelessWidget {
                 titleMedium: GoogleFonts.outfit(),
                 bodyLarge: GoogleFonts.outfit(),
                 bodyMedium: GoogleFonts.outfit(),
-                bodySmall: GoogleFonts.outfit(),
               ),
             ),
             debugShowCheckedModeBanner: false,
